@@ -1,0 +1,46 @@
+           let urls = ['/api/movie/in_theaters', '/api/movie/coming_soon'];
+            let requests = urls.map(makeRequest);
+            var _this = this;
+            function makeRequest(url) {
+                return axios.get(url);
+            };
+            axios.all(requests).then(axios.spread(function (...res) {
+                // Both requests are now complete
+                if (res[0].status === 200 && res[1].status === 200) {
+                    _this.in_theaters = res[0].data;
+                    _this.coming_soon = res[1].data;
+                    _this.loading = false;
+                    _this.$nextTick(() => {
+                        if (!_this.scroll) {
+                            _this.scroll = new BScroll(_this.$els.intheaters, {
+                                click: true
+                            });
+                        } else {
+                            _this.scroll.refresh();
+                        }
+                    });
+                };
+            }));
+      let urls = ['/api/goods', '/api/seller'];
+      let requests = urls.map(makeRequest);
+      var _this = this;
+      function makeRequest(url) {
+        return axios.get(url);
+      };
+      axios.all(requests).then(axios.spread(function (...res) {
+        // Both requests are now complete
+        if (res[0].status === 200 && res[1].status === 200) {
+          _this.goods = res[0].data;
+          _this.seller = res[1].data;
+        };
+_this.$nextTick(() => {
+            if (!_this.scroll) {
+              _this.scroll = new BScroll(_this.$els.goods, {
+                scrollX:true,
+                click: true
+              });
+            } else {
+              _this.scroll.refresh();
+            }
+          });
+      }));

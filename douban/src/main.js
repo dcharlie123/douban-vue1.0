@@ -9,34 +9,44 @@ import books from './components/books/books.vue';
 import broadcast from './components/broadcast/broadcast.vue';
 import group from './components/group/group.vue';
 import index from './components/index/index.vue';
+import movieMsg from './components/movieMsg/movieMsg.vue'
 import user from './components/user/user.vue'
 
 Vue.prototype.$http = axios
 /* eslint-disable no-new */
 Vue.use(VueRouter);
-let app=Vue.extend(App);//挂载在App
-let router=new VueRouter({
-  linkActiveClass:'active'
+let app = Vue.extend(App);//挂载在App
+let router = new VueRouter({
+  linkActiveClass: 'active'
 });
 
 router.map({
-  '/index':{
-    component:index
+  '/index': {
+    name:'index',
+    component: index,
   },
-  '/books':{
-    component:books
+  '/books': {
+    name:'books',
+    component: books
   },
-  '/broadcast':{
-    component:broadcast
+  '/broadcast': {
+    name:'broadcast',
+    component: broadcast
   },
-  '/group':{
-    component:group
+  '/group': {
+    name:'group',
+    component: group
   },
-  '/user':{
-    component:user
+  '/user': {
+    name:'user',
+    component: user
+  },
+  '/movies/:id': {
+    name: 'movieMsg',
+    component: movieMsg
   }
 });
 router.redirect({
-	'/':'/index'
+  '/': '/index'
 });
-router.start(app,'#app');
+router.start(app, '#app');

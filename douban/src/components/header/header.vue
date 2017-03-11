@@ -1,10 +1,17 @@
 <template>
     <div class="search-wrap">
+        <div class="back" v-show="$route.name!=='index'" @click="back"><i class="iconfont icon-back"></i></div>
         <h1>豆瓣</h1>
     </div>
 </template>
 <script>
-    export default {}
+    export default {
+        methods:{
+            back(){
+                window.history.go(-1);
+            }
+        }
+    }
 
 </script>
 <style lang="less">
@@ -20,6 +27,12 @@
         z-index: 9999;
         text-align: center;
         border-bottom: 1px solid #dbdbdd;
+        .back{
+            font-size: 20px;
+            color:#00b600;
+            float: left;
+            padding-left: 15px;
+        }
         h1 {
             margin: 0;
             padding: 0;
